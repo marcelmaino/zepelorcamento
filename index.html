@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orçamento - Reestruturação de Front-ends | Marcel Maino</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'Inter', system-ui, sans-serif; }
+
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+        }
+
+        .stats-card {
+            background: rgba(255,255,255,0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .badge {
+            font-size: 0.65rem;
+            letter-spacing: 0.05em;
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        .logo-circle {
+            width: 56px;
+            height: 56px;
+            min-width: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: white;
+            letter-spacing: -0.02em;
+        }
+
+        .site-preview {
+            transition: opacity 0.3s ease;
+        }
+        .site-preview:hover {
+            opacity: 0.85;
+        }
+
+        .price-tag {
+            font-variant-numeric: tabular-nums;
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            .card-hover:hover { transform: none; box-shadow: none; }
+            body { background: white !important; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 antialiased">
+
+    <!-- Hero Section -->
+    <header class="hero-bg text-white relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-0 w-96 h-96 bg-indigo-500 rounded-full filter blur-3xl -translate-x-1/2 -translate-y-1/2"></div>
+            <div class="absolute bottom-0 right-0 w-96 h-96 bg-purple-500 rounded-full filter blur-3xl translate-x-1/2 translate-y-1/2"></div>
+        </div>
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+            <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-10">
+                <div>
+                    <p class="text-indigo-300 text-sm font-semibold tracking-widest uppercase mb-3">Proposta Comercial</p>
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight">
+                        Reestruturação de<br>
+                        <span class="bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">Front-ends</span>
+                    </h1>
+                </div>
+                <div class="text-right shrink-0">
+                    <div class="stats-card rounded-2xl px-6 py-4">
+                        <p class="text-gray-400 text-xs uppercase tracking-wider mb-1">Preparado para</p>
+                        <p class="text-2xl font-bold">Tiago</p>
+                        <p class="text-gray-400 text-sm mt-1">Junho 2026</p>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-gray-300 text-lg max-w-2xl leading-relaxed mb-12">
+                Desenvolvimento de novos front-ends para os sites existentes, com redesign moderno,
+                melhorias de performance e integração com ferramentas atuais.
+            </p>
+
+            <!-- Stats -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <div class="stats-card rounded-xl px-5 py-4">
+                    <p class="text-3xl font-extrabold text-white">14</p>
+                    <p class="text-gray-400 text-sm mt-1">Sites</p>
+                </div>
+                <div class="stats-card rounded-xl px-5 py-4">
+                    <p class="text-3xl font-extrabold text-white">1</p>
+                    <p class="text-gray-400 text-sm mt-1">Apresentação PDF</p>
+                </div>
+                <div class="stats-card rounded-xl px-5 py-4">
+                    <p class="text-3xl font-extrabold text-indigo-400 price-tag">R$ 20.950</p>
+                    <p class="text-gray-400 text-sm mt-1">Total Sites</p>
+                </div>
+                <div class="stats-card rounded-xl px-5 py-4">
+                    <p class="text-3xl font-extrabold text-emerald-400 price-tag">R$ 23.050</p>
+                    <p class="text-gray-400 text-sm mt-1">Total Geral</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+        <!-- Section Title -->
+        <div class="flex items-center gap-4 mb-10">
+            <div class="w-1.5 h-10 bg-gradient-to-b from-indigo-500 to-purple-500 rounded-full"></div>
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Novos Front-ends</h2>
+                <p class="text-gray-500 mt-1">14 projetos de reestruturação de sites</p>
+            </div>
+        </div>
+
+        <!-- Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 mb-20">
+
+            <!-- ZZZ Tour -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.05s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #0284c7, #38bdf8)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #0284c7, #0ea5e9)">
+                            <img src="https://www.google.com/s2/favicons?domain=zzztour.com.br&sz=32" alt="ZZZ Tour" onerror="this.style.display='none'; this.parentElement.textContent='ZT'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">ZZZ Tour</h3>
+                            <p class="text-sm text-gray-500">Agência de Viagens e Turismo</p>
+                        </div>
+                        <span class="badge bg-amber-100 text-amber-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">LP sugerida</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do site retirando o menu <strong class="text-gray-800">BLOG</strong> e integrando com plugin
+                            <a href="https://dash.elfsight.com/apps/instagram-feed/pricing/single" target="_blank" class="text-sky-600 hover:underline">Elfsight Instagram Feed</a>.
+                            Possibilidade de Landing Page.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://zzztour.com.br" target="_blank" class="text-sm text-sky-600 hover:text-sky-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            zzztour.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.350</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Technorodas -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.1s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #c2410c, #f97316)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #c2410c, #ea580c)">
+                            <img src="https://www.google.com/s2/favicons?domain=technorodas.com.br&sz=32" alt="Technorodas" onerror="this.style.display='none'; this.parentElement.textContent='TR'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">Technorodas</h3>
+                            <p class="text-sm text-gray-500">Industrial Agrícola</p>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            Fabricante de rodas e aros para o agronegócio.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://technorodas.com.br" target="_blank" class="text-sm text-orange-600 hover:text-orange-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            technorodas.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.800</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ssoraf Car -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.15s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #dc2626, #ef4444)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #dc2626, #ef4444)">
+                            <img src="https://www.google.com/s2/favicons?domain=ssoraf.com.br&sz=32" alt="Ssoraf" onerror="this.style.display='none'; this.parentElement.textContent='SC'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">Ssoraf Car</h3>
+                            <p class="text-sm text-gray-500">Reparos Automotivos Multimarcas</p>
+                        </div>
+                        <span class="badge bg-amber-100 text-amber-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">LP sugerida</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend retirando o menu <strong class="text-gray-800">NOTÍCIAS</strong> e integrando com plugin
+                            <a href="https://dash.elfsight.com/apps/instagram-feed/pricing/single" target="_blank" class="text-red-600 hover:underline">Elfsight Instagram Feed</a>.
+                            Possibilidade de Landing Page.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://ssoraf.com.br" target="_blank" class="text-sm text-red-600 hover:text-red-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            ssoraf.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.500</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rural Tek -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.2s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #15803d, #22c55e)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #15803d, #16a34a)">
+                            <img src="https://www.google.com/s2/favicons?domain=ruraltek.com.br&sz=32" alt="RuralTek" onerror="this.style.display='none'; this.parentElement.textContent='RT'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">Rural Tek</h3>
+                            <p class="text-sm text-gray-500">Certificadora de Sementes</p>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            Entidade certificadora de sementes e análise de solos.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://www.ruraltek.com.br" target="_blank" class="text-sm text-green-600 hover:text-green-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            ruraltek.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.500</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Retífica Mocellin -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.25s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #1e3a5f, #3b82f6)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #1e3a5f, #2563eb)">
+                            <img src="https://www.google.com/s2/favicons?domain=retificamocellin.com.br&sz=32" alt="Retífica Mocellin" onerror="this.style.display='none'; this.parentElement.textContent='RM'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">Retífica Mocellin</h3>
+                            <p class="text-sm text-gray-500">Retífica de Motores</p>
+                        </div>
+                        <span class="badge bg-amber-100 text-amber-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">LP sugerida</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend retirando o menu <strong class="text-gray-800">NOTÍCIAS</strong> e integrando com plugin
+                            <a href="https://dash.elfsight.com/apps/instagram-feed/pricing/single" target="_blank" class="text-blue-600 hover:underline">Elfsight Instagram Feed</a>.
+                            Possibilidade de Landing Page.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://retificamocellin.com.br" target="_blank" class="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            retificamocellin.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.550</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Planacon -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.3s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #1e40af, #3b82f6)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #1e40af, #2563eb)">
+                            <img src="https://www.google.com/s2/favicons?domain=planaconpf.com.br&sz=32" alt="Planacon" onerror="this.style.display='none'; this.parentElement.textContent='PL'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">Planacon</h3>
+                            <p class="text-sm text-gray-500">Contabilidade e Assessoria</p>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            Serviços de contabilidade, compliance tributário e legalização.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://www.planaconpf.com.br" target="_blank" class="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            planaconpf.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.500</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Perfil Metais -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.35s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #374151, #6b7280)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #374151, #4b5563)">
+                            <img src="https://www.google.com/s2/favicons?domain=perfilmetais.ind.br&sz=32" alt="Perfil Metais" onerror="this.style.display='none'; this.parentElement.textContent='PM'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">Perfil Metais</h3>
+                            <p class="text-sm text-gray-500">Ferro e Aço</p>
+                        </div>
+                        <span class="badge bg-purple-100 text-purple-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">+4 páginas internas</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            Criar 4 páginas internas de produtos:
+                        </p>
+                        <div class="flex flex-wrap gap-1.5">
+                            <span class="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-md">Telhas metálicas</span>
+                            <span class="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-md">Corte laser e oxicorte</span>
+                            <span class="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-md">Dobras de chapas</span>
+                            <span class="text-xs bg-gray-100 text-gray-700 px-2 py-0.5 rounded-md">Produtos de gaveta</span>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://perfilmetais.ind.br/" target="_blank" class="text-sm text-gray-600 hover:text-gray-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            perfilmetais.ind.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.650</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kin Master -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.4s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #0d9488, #14b8a6)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #0d9488, #14b8a6)">
+                            <img src="https://www.google.com/s2/favicons?domain=kinmaster.com.br&sz=32" alt="Kin Master" onerror="this.style.display='none'; this.parentElement.textContent='KM'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">Kin Master</h3>
+                            <p class="text-sm text-gray-500">Produtos Químicos Farmacêuticos</p>
+                        </div>
+                        <span class="badge bg-amber-100 text-amber-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Instagram</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do site retirando o menu <strong class="text-gray-800">BLOG</strong> e integrando com plugin
+                            <a href="https://dash.elfsight.com/apps/instagram-feed/pricing/single" target="_blank" class="text-teal-600 hover:underline">Elfsight Instagram Feed</a>.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://kinmaster.com.br" target="_blank" class="text-sm text-teal-600 hover:text-teal-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            kinmaster.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.650</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Injemax -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.45s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #2563eb, #60a5fa)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #2563eb, #3b82f6)">
+                            <img src="https://www.google.com/s2/favicons?domain=injemax.com.br&sz=32" alt="Injemax" onerror="this.style.display='none'; this.parentElement.textContent='IX'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">Injemax</h3>
+                            <p class="text-sm text-gray-500">Injeção de Plásticos</p>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            Indústria de injeção e sopro de plásticos, matrizaria e sustentabilidade.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://injemax.com.br/" target="_blank" class="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            injemax.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.500</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Draggon -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.5s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #be123c, #f43f5e)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #be123c, #e11d48)">
+                            <img src="https://www.google.com/s2/favicons?domain=draggon.com.br&sz=32" alt="Draggon" onerror="this.style.display='none'; this.parentElement.textContent='DG'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">Drággon Sports</h3>
+                            <p class="text-sm text-gray-500">Uniformes Esportivos</p>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            Fardamentos para futebol, futsal e voleibol com tecnologia Dry Fit.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://draggon.com.br/" target="_blank" class="text-sm text-rose-600 hover:text-rose-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            draggon.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.250</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSA Printers -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.55s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #1e40af, #6366f1)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #1e40af, #4338ca)">
+                            <img src="https://www.google.com/s2/favicons?domain=csaprinters.com.br&sz=32" alt="CSA Printers" onerror="this.style.display='none'; this.parentElement.textContent='CSA'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">CSA Printers</h3>
+                            <p class="text-sm text-gray-500">Locação e Venda de Impressoras</p>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            Outsourcing de impressão, venda e locação de equipamentos.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://www.csaprinters.com.br/" target="_blank" class="text-sm text-indigo-600 hover:text-indigo-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            csaprinters.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.350</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Centro Sul Cereais -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.6s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #166534, #22c55e)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #166534, #15803d)">
+                            <img src="https://www.google.com/s2/favicons?domain=centrosulcereais.com.br&sz=32" alt="Centro Sul" onerror="this.style.display='none'; this.parentElement.textContent='CS'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">Centro Sul Cereais</h3>
+                            <p class="text-sm text-gray-500">Sementes e Cereais</p>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            Maior negociador de aveia do país, com 7 filiais.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://www.centrosulcereais.com.br/" target="_blank" class="text-sm text-green-600 hover:text-green-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            centrosulcereais.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.250</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Amplexa -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.65s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #7c3aed, #a78bfa)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #7c3aed, #8b5cf6)">
+                            <img src="https://www.google.com/s2/favicons?domain=amplexa.com.br&sz=32" alt="Amplexa" onerror="this.style.display='none'; this.parentElement.textContent='AX'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">Amplexa</h3>
+                            <p class="text-sm text-gray-500">Cadeiras para Igrejas e Auditórios</p>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            +30 anos de mercado, mais de 1 milhão de cadeiras vendidas.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://amplexa.com.br/" target="_blank" class="text-sm text-purple-600 hover:text-purple-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            amplexa.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.450</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AG Brasil -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.7s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #059669, #34d399)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #059669, #10b981)">
+                            <img src="https://www.google.com/s2/favicons?domain=agbrasil.net.br&sz=32" alt="AG Brasil" onerror="this.style.display='none'; this.parentElement.textContent='AG'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">AG Brasil</h3>
+                            <p class="text-sm text-gray-500">agbrasil.net.br</p>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://agbrasil.net.br/" target="_blank" class="text-sm text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            agbrasil.net.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.650</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Zepel PDF Section -->
+        <div class="flex items-center gap-4 mb-10">
+            <div class="w-1.5 h-10 bg-gradient-to-b from-violet-500 to-fuchsia-500 rounded-full"></div>
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Apresentação PDF</h2>
+                <p class="text-gray-500 mt-1">Projeto especial de apresentação institucional</p>
+            </div>
+        </div>
+
+        <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden max-w-2xl animate-in" style="animation-delay: 0.75s">
+            <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #6366f1, #8b5cf6, #a855f7)"></div>
+            <div class="p-6 sm:p-8">
+                <div class="flex items-start gap-5 mb-5">
+                    <div class="logo-circle" style="background: linear-gradient(135deg, #6366f1, #8b5cf6); width: 64px; height: 64px; min-width: 64px; font-size: 1.1rem;">
+                        <img src="https://www.google.com/s2/favicons?domain=zepel.com.br&sz=32" alt="Zepel" onerror="this.style.display='none'; this.parentElement.textContent='ZEPEL'">
+                    </div>
+                    <div class="flex-1">
+                        <h3 class="text-xl font-bold text-gray-900">Zepel — Apresentação Institucional</h3>
+                        <p class="text-sm text-gray-500 mt-1">Agência de Tecnologia</p>
+                    </div>
+                </div>
+                <p class="text-sm text-gray-600 leading-relaxed mb-6">
+                    Desenvolvimento de apresentação institucional em <strong class="text-gray-800">PDF</strong> seguindo a identidade visual e
+                    conteúdo do site <a href="https://www.zepel.com.br" target="_blank" class="text-indigo-600 hover:underline font-medium">zepel.com.br</a>.
+                    DNA em Front-end, Back-end, DevOps e Cloud Computing.
+                </p>
+                <div class="flex items-center justify-between pt-5 border-t border-gray-100">
+                    <div class="flex items-center gap-2">
+                        <span class="badge bg-indigo-100 text-indigo-700 font-semibold px-2.5 py-1 rounded-full">Apresentação PDF</span>
+                    </div>
+                    <p class="text-3xl font-extrabold text-gray-900 price-tag">R$ 2.100</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Summary Section -->
+        <div class="mt-20 mb-8">
+            <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 sm:p-10 text-white overflow-hidden relative">
+                <div class="absolute top-0 right-0 w-72 h-72 bg-indigo-500/10 rounded-full filter blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+                <div class="relative">
+                    <h3 class="text-xl font-bold mb-8 text-gray-300 uppercase tracking-wider text-sm">Resumo do Orçamento</h3>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                        <div>
+                            <p class="text-gray-400 text-sm mb-1">Reestruturação de Sites (14)</p>
+                            <p class="text-3xl font-extrabold price-tag">R$ 20.950</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm mb-1">Apresentação PDF (1)</p>
+                            <p class="text-3xl font-extrabold price-tag">R$ 2.100</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-400 text-sm mb-1">Total Geral</p>
+                            <p class="text-4xl font-black text-emerald-400 price-tag">R$ 23.050</p>
+                        </div>
+                    </div>
+
+                    <div class="border-t border-white/10 pt-6">
+                        <h4 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-4">Detalhamento por projeto</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-2">
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">ZZZ Tour</span>
+                                <span class="font-semibold price-tag">R$ 1.350</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">Technorodas</span>
+                                <span class="font-semibold price-tag">R$ 1.800</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">Ssoraf Car</span>
+                                <span class="font-semibold price-tag">R$ 1.500</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">Rural Tek</span>
+                                <span class="font-semibold price-tag">R$ 1.500</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">Retífica Mocellin</span>
+                                <span class="font-semibold price-tag">R$ 1.550</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">Planacon</span>
+                                <span class="font-semibold price-tag">R$ 1.500</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">Perfil Metais</span>
+                                <span class="font-semibold price-tag">R$ 1.650</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">Kin Master</span>
+                                <span class="font-semibold price-tag">R$ 1.650</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">Injemax</span>
+                                <span class="font-semibold price-tag">R$ 1.500</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">Drággon Sports</span>
+                                <span class="font-semibold price-tag">R$ 1.250</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">CSA Printers</span>
+                                <span class="font-semibold price-tag">R$ 1.350</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">Centro Sul Cereais</span>
+                                <span class="font-semibold price-tag">R$ 1.250</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">Amplexa</span>
+                                <span class="font-semibold price-tag">R$ 1.450</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">AG Brasil</span>
+                                <span class="font-semibold price-tag">R$ 1.650</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-indigo-400 font-medium">Zepel (PDF)</span>
+                                <span class="font-semibold text-indigo-400 price-tag">R$ 2.100</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6 sm:p-8 mb-8">
+            <div class="flex gap-3">
+                <svg class="w-6 h-6 text-amber-500 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div>
+                    <h4 class="font-bold text-amber-800 mb-2">Observações</h4>
+                    <ul class="text-sm text-amber-700 space-y-2">
+                        <li>Os projetos marcados como <strong>"LP sugerida"</strong> podem ser convertidos em Landing Pages para maior eficiência, mediante alinhamento.</li>
+                        <li>A integração com Instagram utiliza o plugin <a href="https://dash.elfsight.com/apps/instagram-feed/pricing/single" target="_blank" class="underline font-medium">Elfsight Instagram Feed</a> (custo do plugin não incluso).</li>
+                        <li>O projeto <strong>Perfil Metais</strong> inclui a criação de 4 páginas internas de produtos adicionais.</li>
+                        <li>Valores válidos para a presente proposta.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-gray-400 py-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-sm">Proposta elaborada por <strong class="text-white">Marcel Maino</strong></p>
+            <p class="text-xs mt-2 text-gray-500">Junho 2026</p>
+        </div>
+    </footer>
+
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate-in').forEach(el => {
+            el.style.animationPlayState = 'paused';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
