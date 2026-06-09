@@ -86,6 +86,33 @@
             font-variant-numeric: tabular-nums;
         }
 
+        .card-finalizado {
+            position: relative;
+            opacity: 0.75;
+        }
+        .card-finalizado .h-1\.5 {
+            background: linear-gradient(90deg, #22c55e, #4ade80) !important;
+        }
+        .card-finalizado .price-tag {
+            text-decoration: line-through;
+            color: #9ca3af;
+        }
+        .finalizado-overlay {
+            position: absolute;
+            top: 16px;
+            right: -32px;
+            background: #22c55e;
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            padding: 4px 40px;
+            transform: rotate(45deg);
+            z-index: 10;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+        }
+
         @media print {
             .no-print { display: none !important; }
             .card-hover:hover { transform: none; box-shadow: none; }
@@ -127,7 +154,7 @@
             <!-- Stats -->
             <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
                 <div class="stats-card rounded-xl px-5 py-4">
-                    <p class="text-3xl font-extrabold text-white">14</p>
+                    <p class="text-3xl font-extrabold text-white">19</p>
                     <p class="text-gray-400 text-sm mt-1">Sites</p>
                 </div>
                 <div class="stats-card rounded-xl px-5 py-4">
@@ -135,11 +162,11 @@
                     <p class="text-gray-400 text-sm mt-1">Apresentação PDF</p>
                 </div>
                 <div class="stats-card rounded-xl px-5 py-4">
-                    <p class="text-3xl font-extrabold text-indigo-400 price-tag">R$ 20.950</p>
+                    <p class="text-3xl font-extrabold text-indigo-400 price-tag">R$ 28.450</p>
                     <p class="text-gray-400 text-sm mt-1">Total Sites</p>
                 </div>
                 <div class="stats-card rounded-xl px-5 py-4">
-                    <p class="text-3xl font-extrabold text-emerald-400 price-tag">R$ 23.050</p>
+                    <p class="text-3xl font-extrabold text-emerald-400 price-tag">R$ 30.550</p>
                     <p class="text-gray-400 text-sm mt-1">Total Geral</p>
                 </div>
             </div>
@@ -154,7 +181,7 @@
             <div class="w-1.5 h-10 bg-gradient-to-b from-indigo-500 to-purple-500 rounded-full"></div>
             <div>
                 <h2 class="text-2xl sm:text-3xl font-bold text-gray-900">Novos Front-ends</h2>
-                <p class="text-gray-500 mt-1">14 projetos de reestruturação de sites</p>
+                <p class="text-gray-500 mt-1">19 projetos de reestruturação de sites</p>
             </div>
         </div>
 
@@ -410,9 +437,10 @@
                 </div>
             </div>
 
-            <!-- Injemax -->
-            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.45s">
-                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #2563eb, #60a5fa)"></div>
+            <!-- Injemax - FINALIZADO -->
+            <div class="card-hover card-finalizado bg-white rounded-2xl shadow-sm border border-green-200 overflow-hidden animate-in" style="animation-delay: 0.45s">
+                <div class="finalizado-overlay">Finalizado</div>
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #22c55e, #4ade80)"></div>
                 <div class="p-6">
                     <div class="flex items-start gap-4 mb-4">
                         <div class="logo-circle" style="background: linear-gradient(135deg, #2563eb, #3b82f6)">
@@ -422,7 +450,10 @@
                             <h3 class="text-lg font-bold text-gray-900">Injemax</h3>
                             <p class="text-sm text-gray-500">Injeção de Plásticos</p>
                         </div>
-                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                        <span class="badge bg-green-100 text-green-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap flex items-center gap-1">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                            Finalizado
+                        </span>
                     </div>
                     <div class="space-y-2 mb-5">
                         <p class="text-sm text-gray-600 leading-relaxed">
@@ -435,7 +466,7 @@
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                             injemax.com.br
                         </a>
-                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.500</p>
+                        <p class="text-2xl font-extrabold price-tag">R$ 1.500</p>
                     </div>
                 </div>
             </div>
@@ -589,6 +620,160 @@
                 </div>
             </div>
 
+            <!-- Santa Rita Concretos - FINALIZADO -->
+            <div class="card-hover card-finalizado bg-white rounded-2xl shadow-sm border border-green-200 overflow-hidden animate-in" style="animation-delay: 0.73s">
+                <div class="finalizado-overlay">Finalizado</div>
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #22c55e, #4ade80)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #78716c, #a8a29e)">
+                            <img src="https://www.google.com/s2/favicons?domain=santaritaconcretos.com.br&sz=32" alt="Santa Rita" onerror="this.style.display='none'; this.parentElement.textContent='SR'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">Santa Rita Concretos</h3>
+                            <p class="text-sm text-gray-500">Pré-fabricados de Concreto</p>
+                        </div>
+                        <span class="badge bg-green-100 text-green-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap flex items-center gap-1">
+                            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                            Finalizado
+                        </span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            Estruturas pré-fabricadas de concreto — comerciais, esportivas e templos.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://santaritaconcretos.com.br/" target="_blank" class="text-sm text-stone-600 hover:text-stone-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            santaritaconcretos.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold price-tag">R$ 1.500</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thermokar -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.75s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #0369a1, #38bdf8)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #0369a1, #0284c7)">
+                            <img src="https://www.google.com/s2/favicons?domain=thermokar.com.br&sz=32" alt="Thermokar" onerror="this.style.display='none'; this.parentElement.textContent='TK'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">Thermokar</h3>
+                            <p class="text-sm text-gray-500">Refrigeração para Transporte</p>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            Comércio e serviços de refrigeração para transporte rodoviário.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://thermokar.com.br/" target="_blank" class="text-sm text-sky-600 hover:text-sky-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            thermokar.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.500</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FF Consórcios -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.8s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #b45309, #f59e0b)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #b45309, #d97706)">
+                            <img src="https://www.google.com/s2/favicons?domain=ffconsorcios.com.br&sz=32" alt="FF Consórcios" onerror="this.style.display='none'; this.parentElement.textContent='FF'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">FF Consórcios</h3>
+                            <p class="text-sm text-gray-500">Consórcios (Auto, Imóveis, Caminhões)</p>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            Planejamento e conquista de bens sem juros — automóveis, imóveis e caminhões.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://ffconsorcios.com.br" target="_blank" class="text-sm text-amber-600 hover:text-amber-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            ffconsorcios.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.500</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FF Cred SCD -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.85s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #1e3a5f, #1d4ed8)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #1e3a5f, #1d4ed8)">
+                            <img src="https://www.google.com/s2/favicons?domain=ffcredscd.com.br&sz=32" alt="FF Cred SCD" onerror="this.style.display='none'; this.parentElement.textContent='FF'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">FF Cred SCD</h3>
+                            <p class="text-sm text-gray-500">Instituição Financeira Digital</p>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            Conta digital, Pix, microcrédito e emissão de CIOT para transporte rodoviário.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://ffcredscd.com.br" target="_blank" class="text-sm text-blue-600 hover:text-blue-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            ffcredscd.com.br
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.500</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FF Digital (ffcred.com) -->
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden animate-in" style="animation-delay: 0.9s">
+                <div class="h-1.5 w-full" style="background: linear-gradient(90deg, #047857, #10b981)"></div>
+                <div class="p-6">
+                    <div class="flex items-start gap-4 mb-4">
+                        <div class="logo-circle" style="background: linear-gradient(135deg, #047857, #059669)">
+                            <img src="https://www.google.com/s2/favicons?domain=ffcred.com&sz=32" alt="FF Digital" onerror="this.style.display='none'; this.parentElement.textContent='FF'">
+                        </div>
+                        <div class="flex-1 min-w-0">
+                            <h3 class="text-lg font-bold text-gray-900">FF Digital</h3>
+                            <p class="text-sm text-gray-500">Soluções para Transporte Rodoviário</p>
+                        </div>
+                        <span class="badge bg-blue-100 text-blue-700 font-semibold px-2.5 py-1 rounded-full whitespace-nowrap">Módulos existentes</span>
+                    </div>
+                    <div class="space-y-2 mb-5">
+                        <p class="text-sm text-gray-600 leading-relaxed">
+                            Reestruturação do frontend <strong class="text-gray-800">mantendo os módulos existentes</strong>.
+                            CIOT, Tag Pedágio, telemedicina e rede credenciada de postos — certificada ISO 9001.
+                        </p>
+                    </div>
+                    <div class="flex items-center justify-between pt-4 border-t border-gray-100">
+                        <a href="https://ffcred.com" target="_blank" class="text-sm text-emerald-600 hover:text-emerald-700 font-medium flex items-center gap-1.5 site-preview">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                            ffcred.com
+                        </a>
+                        <p class="text-2xl font-extrabold text-gray-900 price-tag">R$ 1.500</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Zepel PDF Section -->
@@ -634,8 +819,8 @@
                     <h3 class="text-xl font-bold mb-8 text-gray-300 uppercase tracking-wider text-sm">Resumo do Orçamento</h3>
                     <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
                         <div>
-                            <p class="text-gray-400 text-sm mb-1">Reestruturação de Sites (14)</p>
-                            <p class="text-3xl font-extrabold price-tag">R$ 20.950</p>
+                            <p class="text-gray-400 text-sm mb-1">Reestruturação de Sites (19)</p>
+                            <p class="text-3xl font-extrabold price-tag">R$ 28.450</p>
                         </div>
                         <div>
                             <p class="text-gray-400 text-sm mb-1">Apresentação PDF (1)</p>
@@ -643,7 +828,7 @@
                         </div>
                         <div>
                             <p class="text-gray-400 text-sm mb-1">Total Geral</p>
-                            <p class="text-4xl font-black text-emerald-400 price-tag">R$ 23.050</p>
+                            <p class="text-4xl font-black text-emerald-400 price-tag">R$ 30.550</p>
                         </div>
                     </div>
 
@@ -683,8 +868,11 @@
                                 <span class="font-semibold price-tag">R$ 1.650</span>
                             </div>
                             <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
-                                <span class="text-gray-300">Injemax</span>
-                                <span class="font-semibold price-tag">R$ 1.500</span>
+                                <span class="text-green-400 flex items-center gap-1.5">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                                    Injemax
+                                </span>
+                                <span class="font-semibold text-green-400 line-through price-tag">R$ 1.500</span>
                             </div>
                             <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
                                 <span class="text-gray-300">Drággon Sports</span>
@@ -705,6 +893,29 @@
                             <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
                                 <span class="text-gray-300">AG Brasil</span>
                                 <span class="font-semibold price-tag">R$ 1.650</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-green-400 flex items-center gap-1.5">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg>
+                                    Santa Rita Concretos
+                                </span>
+                                <span class="font-semibold text-green-400 line-through price-tag">R$ 1.500</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">Thermokar</span>
+                                <span class="font-semibold price-tag">R$ 1.500</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">FF Consórcios</span>
+                                <span class="font-semibold price-tag">R$ 1.500</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">FF Cred SCD</span>
+                                <span class="font-semibold price-tag">R$ 1.500</span>
+                            </div>
+                            <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
+                                <span class="text-gray-300">FF Digital</span>
+                                <span class="font-semibold price-tag">R$ 1.500</span>
                             </div>
                             <div class="flex justify-between text-sm py-1.5 border-b border-white/5">
                                 <span class="text-indigo-400 font-medium">Zepel (PDF)</span>
